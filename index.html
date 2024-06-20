@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>..::Planificador - Bob Patiño::..</title>
+    <link rel="icon" href="https://lh3.google.com/u/0/d/1i-YlnHExF08YzBil8VMf9j_aZkzGaQ-7=w1920-h953-iv1" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Handlee&display=swap" rel="stylesheet" />
+
+    <style>
+      .cabecera {
+        height: 1px;
+      }
+      body {
+        background: #3b3b3b;
+        margin: 15px;
+      }
+      .tituloBP {
+        font-size: 50px;
+        margin: 20px;
+      }
+      .menu {
+        display: flex;
+        position: relative;
+        background: #ffeacc;
+        text-align: center;
+        border-radius: 15px;
+        width: 75vw;
+        height: calc(100vh - 90px);
+        border-top-left-radius: 50px;
+        padding: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        -moz-box-shadow: -11px 12px 13px 0px rgb(19, 19, 19);
+        box-shadow: -11px 12px 13px 0px rgb(21, 21, 21);
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+        font-size: 150%;
+      }
+      .no-marginend {
+        margin-bottom: 0px;
+      }
+      .margintop {
+        margin-top: 25px;
+      }
+      .margintop2 {
+        margin-top: 5px;
+      }
+      .ancho {
+        width: 230px;
+      }
+      .gochi-hand-regular {
+        font-family: "Gochi Hand", cursive;
+        font-weight: 400;
+        font-style: normal;
+      }
+      .nohaytareas {
+        font-style: italic;
+        text-align: center;
+      }
+      button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+      }
+      .panelmenu {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .panelpiemenu {
+        display: flex;
+        position: absolute;
+        bottom: 5%;
+        width: 90%;
+
+        align-content: center;
+        justify-content: flex-end;
+      }
+      .panelpiemenu2 {
+        display: grid;
+        grid-template-columns: 206px 1fr 0px 200px;
+        position: absolute;
+        bottom: -1%;
+        width: 95%;
+        align-content: center;
+        justify-content: flex-end;
+      }
+      .nuevatarea {
+        text-align: center;
+        background: #de5b04a0;
+        padding: 20px;
+        margin: 20px;
+        margin-top: 6vh;
+        border-radius: 25px;
+      }
+      .bienvenido {
+        font-style: italic;
+        display: inline;
+        text-align: center;
+      }
+
+      .listadotareas {
+        width: 100%;
+      }
+      #categoria {
+        margin-right: 2%;
+        align-items: center;
+        align-self: center;
+        align-content: center;
+      }
+      .panelmenu img,
+      .panelpiemenu img,
+      .panelpiemenu2 img,
+      .nuevatarea img {
+        height: 45px;
+        border-radius: 10px;
+        align-self: center;
+        margin: 2%;
+      }
+      .listadotareas img {
+        height: 30px;
+        text-align: right;
+        align-items: center;
+        display: inline;
+      }
+
+      #ico_cat {
+        height: 50px;
+        text-align: right;
+        align-items: center;
+        display: inline;
+      }
+      ul {
+        list-style: none;
+        margin: 0px 0px;
+        padding: 0px;
+      }
+      .liactivos {
+        background: #de5b04a0;
+        margin: 4px;
+        padding: 4px;
+        border-radius: 5px;
+      }
+
+      .liactivos:hover {
+        background: #de5b0481;
+      }
+      .liendetalle {
+        background: #de5b04a0;
+        margin: 4px;
+        padding: 4px;
+        border-radius: 5px;
+      }
+
+      .litachado {
+        background: #3b3b3be5;
+        margin: 4px;
+        padding: 4px;
+        border-radius: 5px;
+      }
+      .imagenbienvenida {
+        height: 250px;
+        max-width: 100%;
+        width: auto;
+      }
+      .btneliminar {
+        margin-inline-end: 1rem;
+      }
+      .btnhecho {
+        width: 30px;
+      }
+      .listadoTareaMenu {
+        align-items: center;
+        font-size: 20px;
+        text-align: left;
+        display: grid;
+        grid-template-columns: 60px 1fr 40px 40px;
+      }
+      @media only screen and (max-width: 600px) {
+        .menu {
+          font-size: 120%;
+          width: 88vw;
+        }
+        .panelpiemenu2 {
+          display: grid;
+          grid-template-columns: 1fr 1fr 50px 40px;
+          position: absolute;
+          bottom: -3%;
+          width: 90%;
+          align-content: center;
+          justify-content: flex-end;
+        }
+        .scrolli {
+          height: 70vh;
+          overflow: auto;
+        }
+      }
+      @media only screen and (max-height: 1368px) {
+        .scrolli {
+          height: 77vh;
+          overflow: auto;
+        }
+      }
+      @media only screen and (max-height: 1025px) {
+        .scrolli {
+          height: 70vh;
+          overflow: auto;
+        }
+      }
+      @media only screen and (max-height: 800px) {
+        .scrolli {
+          height: 62vh;
+          overflow: auto;
+        }
+      }
+      @media only screen and (max-height: 741px) {
+        .scrolli {
+          height: 66vh;
+          overflow: auto;
+        }
+      }
+      @media only screen and (max-height: 668px) {
+        .scrolli {
+          height: 63vh;
+          overflow: auto;
+        }
+      }
+      @media only screen and (max-height: 600px) {
+        .scrolli {
+          height: 55vh;
+          overflow: auto;
+        }
+      }
+      @media only screen and (max-height: 414px) {
+        .scrolli {
+          height: 38vh;
+          overflow: auto;
+        }
+      }
+      a {
+        text-decoration: none;
+        color: rgb(37, 37, 37);
+      }
+
+      .up {
+        font-size: 125%;
+      }
+      .descripcion {
+        font-style: italic;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        height: 60vh;
+        justify-content: center;
+      }
+      .agrandar {
+        font-size: 150%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="cabecera"></header>
+
+    <section id="bienvenido" class="menu">
+      <div class="bienvenido">
+        <h4 class="no-marginend">Bienvenido al anotador de tareas de</h4>
+        <h4 class="tituloBP gochi-hand-regular">Bob Patiño</h4>
+        <img id="img_frase" class="imagenbienvenida" src="" alt="patiño" />
+        <p id="fraseinsp"></p>
+      </div>
+      <div class="panelpiemenu">
+        <button id="boton_inicio" onclick="compruebatareas()">
+          <img src="https://lh3.google.com/u/0/d/1sgOi6_KD0nYOmP7Wtvu_FyiNcBmU2m4x=w1920-h953-iv1" alt="ingrese" />
+        </button>
+      </div>
+    </section>
+
+    <section id="menu" class="menu">
+      <div class="panelmenu">
+        <h2 class="gochi-hand-regular">Lista de Tareas</h2>
+        <img src="https://lh3.google.com/u/0/d/1i-YlnHExF08YzBil8VMf9j_aZkzGaQ-7=w1920-h953-iv1" alt="icono patiño" />
+      </div>
+
+      <div class="listadotareas">
+        <ul class="gochi-hand-regular scrolli" id="listado">
+          <img id="ico_cat" src="" alt="icono categoria" />
+          <button id="boton_tachar"></button>
+          <button id="boton_eliminar"></button>
+        </ul>
+      </div>
+      <div u class="panelpiemenu">
+        <button id="boton_agregar" onclick="mostrarcreartareas()">
+          <img src="https://lh3.google.com/u/0/d/1SiT1S1m90fmFVuMut8nBKe-OqncaqWph=w1920-h953-iv1" alt="Agregar Tarea" />
+        </button>
+      </div>
+    </section>
+
+    <section id="detalletarea" class="menu">
+      <ul id="list_detalle" class="margintop"></ul>
+      <div class="panelpiemenu2">
+        <p id="categoria"></p>
+        <img id="img_cat" src="" />
+        <!-- COMO RESOLVER PASAR INDEX DE TAREA EN DETALLE? resuelto en js -->
+        <button id="boton_eliminar" onclick="eliminartarea_detalle()">
+          <img src="https://lh3.google.com/u/0/d/1mrx8VEu6n_gGO8ztm5ZPlAwTLvGBHwZE=w1920-h953-iv1" alt="volver a menú" />
+        </button>
+
+        <button id="boton_volver" onclick="compruebatareas()">
+          <img src="https://lh3.google.com/u/0/d/1qRD3ruEq1Fsv7TOg2kFI08XP_rtj-UGQ=w1920-h953-iv1" alt="volver a menú" />
+        </button>
+      </div>
+    </section>
+
+    <section id="nohaytareas" class="menu">
+      <div class="nohaytareas">
+        <h4>Anotador de tareas</h4>
+        <p id="mensaje"></p>
+        <img src="https://lh3.google.com/u/0/d/1aDPhwrbxzE8p5sTqEXAEZP22tbxkFAJx=w1920-h953-iv1" alt="patiño" />
+      </div>
+      <div class="panelpiemenu">
+        <button id="boton_agregar" onclick="mostrarcreartareas()">
+          <img src="https://lh3.google.com/u/0/d/1SiT1S1m90fmFVuMut8nBKe-OqncaqWph=w1920-h953-iv1" alt="Agregar Tarea" />
+        </button>
+      </div>
+    </section>
+
+    <section id="creartarea" class="menu">
+      <div class="nuevatarea">
+        <h4>Crear nueva tarea</h4>
+
+        <p class="no-marginend">¿qué tipo de tarea es esta?</p>
+        <div>
+          <p class="no-marginend">categoría</p>
+          <select type="text" class="custom-select" id="nuevacat" placeholder="¿qué tipo de tarea es esta?">
+            <option value="Aseo">Aseo</option>
+            <option value="Cocina">Cocina</option>
+            <option value="Deportes">Deportes</option>
+            <option value="Estudio">Estudio</option>
+            <option value="Jardinería">Jardinería</option>
+            <option value="Médico">Médico</option>
+            <option value="Música">Música</option>
+            <option value="Ocio">Ocio</option>
+            <option value="Presupuesto">Presupuesto</option>
+            <option value="Trabajo">Trabajo</option>
+            <option value="Cuentas">Cuentas</option>
+            <option value="Mantenimiento Vehicular">Mantenimiento Vehicular</option>
+            <option value="Mascotas">Mascotas</option>
+            <option value="Vacaciones">Vacaciones</option>
+          </select>
+        </div>
+
+        <p class="no-marginend">título de tarea</p>
+        <input class="ancho" type="text" id="nuevotitulo" />
+        <p class="no-marginend">¿qué tenes que hacer?</p>
+        <textarea class="margintop2" id="nuevadescrip" rows="6" cols="30" placeholder="Anote anote!..."></textarea>
+      </div>
+      <div class="panelpiemenu">
+        <button id="boton_guardar" onclick="funcreartarea()">
+          <img src="https://lh3.google.com/u/0/d/1MmV4diLAvQDwZu5CwjI4BylDYdO-FJrR=w1920-h953-iv1" alt="Guardar Tarea" />
+        </button>
+        <button id="boton_volver" onclick="compruebatareas()">
+          <img src="https://lh3.google.com/u/0/d/1qRD3ruEq1Fsv7TOg2kFI08XP_rtj-UGQ=w1920-h953-iv1" alt="volver a menú" />
+        </button>
+      </div>
+    </section>
+  </body>
+  <script>
+    //section bienvenido
+    let bienvenido = document.getElementById("bienvenido");
+    let frase = document.getElementById("fraseinsp");
+    let imgfrase = document.getElementById("img_frase");
+    let imgCat = document.getElementById("img_cat");
+    let imgCatList = document.getElementById("ico_cat");
+
+    // section menu con lista de tareas
+    let menut = document.getElementById("menu");
+    // elemento lista de tareas UL
+    let listado = document.getElementById("listado");
+
+    // elemento detalle de tarea
+    let detalletarea = document.getElementById("detalletarea");
+
+    // elemento list de detalle de tarea
+    let list_det = document.getElementById("list_detalle");
+
+    // elemento categoria al pie
+    let cat_pie = document.getElementById("categoria");
+
+    // elemento parrafo para mensaje
+    let mensaje = document.getElementById("mensaje");
+    // elemento parrafo para mensaje
+    let elemnohaytareas = document.getElementById("nohaytareas");
+
+    // elemento creartarea
+    let creartarea = document.getElementById("creartarea");
+
+    //elemento boton eliminar
+    let btn_eliminar = document.getElementById("boton_eliminar");
+
+    //objetos tareas:
+    let tareas = [];
+
+    const haystorage = () => {
+      //consultamos en el STORAGE por primeravez
+      let tareas_de_storage = JSON.parse(localStorage.getItem("tareitas")); //JSON.parse para pasar de string a objeto
+
+      if (tareas_de_storage === null || tareas_de_storage === undefined) {
+        console.log("nuuuulo");
+        //vemos que no este vacio
+        tareas = [];
+        tareas_de_storage = [];
+      } else {
+        console.log("no nulo");
+      }
+
+      if (tareas_de_storage.length > 0) {
+        console.log("no esta vacio");
+        //vemos que no este vacio
+        tareas = tareas_de_storage;
+      } else {
+        tareas = [];
+        console.log("si esta vacio");
+      }
+    };
+
+    //objetos frases
+    let frases = [
+      {
+        frase: "¡Persigue tus sueños con la tenacidad de un supervillano persiguiendo a su archienemigo!",
+        imagen: "https://lh3.google.com/u/0/d/1EfChB-uNTudZ2zsY_kCCk2T6xuVShoXG=w1920-h953-iv1",
+      },
+      {
+        frase: "Recuerda, incluso los fracasos son solo lecciones en tu camino hacia la grandeza, ¡como los planes fallidos para atrapar a Bart Simpson!",
+        imagen: "https://lh3.google.com/u/0/d/1txKG9oyqHE0hKQwLL5qP9ndSLtsNg2-c=w1920-h953-iv1",
+      },
+      {
+        frase: "No dejes que el miedo te detenga; conviértelo en tu combustible para alcanzar tus objetivos, ¡como yo convierto mi ira en determinación para vengarme!",
+        imagen: "https://lh3.google.com/u/0/d/1-2zbryNTr4WX4djtzwzCKPHRwp16VaBj=w1920-h953-iv1",
+      },
+      {
+        frase: "La paciencia es la llave del éxito, ¡pero también lo es una buena trampa elaborada!",
+        imagen: "https://lh3.google.com/u/0/d/18cSydTRZf2cOnj_10tthw_2_r_a9D9T7=w1920-h953-iv1",
+      },
+      {
+        frase: "Cada revés es una oportunidad para volver más fuerte, ¡al igual que cada escape de prisión me hace un mejor villano!",
+        imagen: "https://lh3.google.com/u/0/d/1TQjnz-biEDTXzOy-lG7z9Ps-QhMUM-u4=w1920-h953-iv1",
+      },
+      {
+        frase: "¡Oh, por favor, los sueños deben ser tan grandes como mis zapatos!",
+        imagen: "https://lh3.google.com/u/0/d/1QYS5x0gHMwg7vsvhjomOK-25M5p2eiP-=w1920-h953-iv1",
+      },
+      {
+        frase: "La determinación y la persistencia son las armas más poderosas en tu arsenal contra la adversidad, ¡al igual que mis conocimientos en ingeniería para construir complejas trampas!",
+        imagen: "https://lh3.google.com/u/0/d/186T-JR-eZAsS4P2ZpsPnFdrTcKYCzNcK=w1920-h953-iv1",
+      },
+      {
+        frase: "Recuerda, el camino hacia el éxito está lleno de obstáculos, ¡pero también de oportunidades para demostrar tu ingenio y astucia!",
+        imagen: "https://lh3.google.com/u/0/d/16UMm-oKjL5G7pkrVnh2Wn0m8_cYl9gaA=w1920-h953-iv1",
+      },
+      {
+        frase: "No importa cuántas veces caigas, levántate con la determinación de un villano que nunca se da por vencido.",
+        imagen: "https://lh3.google.com/u/0/d/1e_ovYE5gZJDcFz_t-VqnOreucRq6AtFw=w1920-h953-iv1",
+      },
+      {
+        frase: "Cada desafío es una oportunidad para brillar; ¡aprovecha cada momento como si fueras el protagonista de tu propia trama!",
+        imagen: "https://lh3.google.com/u/0/d/1subizn2_O4hUTQNni9wIfLfWYBXuQWYq=w1920-h953-iv1",
+      },
+      {
+        frase: "Una vez traté de matar al mejor amante del mundo, pero supe que hay muchas leyes contra el suicidio.",
+        imagen: "https://lh3.google.com/u/0/d/1QXSu4icreGeKbBu1bzTaoq4e6QuQ5Bys=w1920-h953-iv1",
+      },
+    ];
+
+    //objetos categorias:
+    let objt_cat = [
+      {
+        categoria: "Aseo",
+        url: "https://lh3.google.com/u/0/d/1BydaizNuyD-kAzEOMvfMs-vtlDgIAj9u=w1920-h953-iv1",
+      },
+      {
+        categoria: "Cocina",
+        url: "https://lh3.google.com/u/0/d/1PxhDVwNHKUMt-NEYJwYuAtIB92pT6t5k=w958-h936-iv1",
+      },
+      {
+        categoria: "Deportes",
+        url: "https://lh3.google.com/u/0/d/1ZeizaMOIUhLad49RfBBSqY-hvft_V5Ho=w958-h936-iv1",
+      },
+      {
+        categoria: "Estudio",
+        url: "https://lh3.google.com/u/0/d/1eFjPTjmqA9jrI_LDtXV2eFxcNxH2MHQ1=w958-h936-iv1",
+      },
+      {
+        categoria: "Jardinería",
+        url: "https://lh3.google.com/u/0/d/18mcqW5L-b1vcMmFFHFDugMWXsLHl9gSa=w958-h936-iv1",
+      },
+      {
+        categoria: "Médico",
+        url: "https://lh3.google.com/u/0/d/1KZV4kaUaIWaAIxQJwNKJP74ZhY5zqB8Y=w958-h936-iv1",
+      },
+      {
+        categoria: "Música",
+        url: "https://lh3.google.com/u/0/d/1YCYvpuzhIn-0nFeRxjwY-_5SzzSUB0WK=w958-h936-iv1",
+      },
+      {
+        categoria: "Ocio",
+        url: "https://lh3.google.com/u/0/d/1tAUPnPzd-i4N0-PueBJcSHc4CIKLI6WW=w958-h936-iv1",
+      },
+      {
+        categoria: "Presupuesto",
+        url: "https://lh3.google.com/u/0/d/1u9p-L67H8UE_QNkgRhcwqJ6QvsjouWiP=w958-h936-iv1",
+      },
+      {
+        categoria: "Trabajo",
+        url: "https://lh3.google.com/u/0/d/1n4RsHcNocI_JaaD6JQ0yB9FiUxAWaeJu=w1525-h953-iv1",
+      },
+      {
+        categoria: "Cuentas",
+        url: "https://lh3.google.com/u/0/d/11LCLhzj1N_tkVpYBHGdEpZI0K7QrFDcP=w1920-h953-iv1",
+      },
+      {
+        categoria: "Mantenimiento Vehicular",
+        url: "https://lh3.google.com/u/0/d/1BL8gwpS6rz6AARINCSdP54OSMg87YC1w=w1920-h953-iv1",
+      },
+      {
+        categoria: "Mascotas",
+        url: "https://lh3.google.com/u/0/d/1_7j53Yv5Zv7FJ0OTMi29A7KJPUPHnsbW=w1920-h953-iv1",
+      },
+      {
+        categoria: "Vacaciones",
+        url: "https://lh3.google.com/u/0/d/1s-u0Qd6W9SkSFlhWYaCWOtOWdNrTosw1=w1920-h953-iv1",
+      },
+    ];
+
+    //random para frases
+    const variarfrases = () => {
+      const random = Math.floor(Math.random() * 11);
+      const lafrase = frases[random];
+      frase.innerHTML = lafrase.frase;
+      imgfrase.setAttribute("src", lafrase.imagen);
+    };
+
+    //comprueba si hay al menos una tarea
+    const compruebatareas = () => {
+      bienvenido.style.display = "none";
+      haystorage();
+      if (tareas.length === 0) {
+        nohaytareas();
+      } else {
+        mostrartareas();
+      }
+    };
+
+    // Muestra listado de tareas
+    const mostrartareas = () => {
+      menut.style.display = "block";
+      elemnohaytareas.style.display = "none";
+      detalletarea.style.display = "none";
+      creartarea.style.display = "none";
+      listado.innerHTML = "";
+      //Lección aprendida....   en una función dentro de un onclick no pasar objeto
+      tareas.map((tarea, index) => {
+        let url = ubicar_icono_para_lista(tarea.categoria);
+        if (tarea.hecho == false) {
+          listado.innerHTML += `<li class="listadoTareaMenu liactivos">
+                <img id="ico_cat" class="listadotareassimp" src="${url}" alt="icono categoria" />
+                <a href="#" onclick="mostrardetalletarea(${index})">${tarea.titulo}</a>
+                <button id="boton_tachar" class="btnhecho" onclick="tachar(${index})">
+                <img src="https://lh3.google.com/u/0/d/1xXvoto6ZGp5qzwgbRy_H0wAdTvFEWQ6q=w1920-h953-iv1" alt="Tachar" />
+                </button><button id="boton_eliminar" class="btneliminar" onclick="eliminartarea( ${index})">
+                <img src="https://lh3.google.com/u/0/d/1mrx8VEu6n_gGO8ztm5ZPlAwTLvGBHwZE=w1920-h953-iv1" alt="Eliminar Tarea" />
+                </button></li>`;
+        } else {
+          listado.innerHTML += `<li class="listadoTareaMenu litachado">
+                <img id="ico_cat" class="listadotareassimp"  src="${url}" alt="icono categoria" />
+                <a href="#" onclick="mostrardetalletarea(${index})"><del>${tarea.titulo}</del></a>
+                <button id="boton_tachar" class="btnhecho" onclick="tachar(${index})">
+                <img src="https://lh3.google.com/u/0/d/1vPxNzavT0v9C9j-J98bu354XFUeb5y0p=w958-h936-iv1" alt="Borrar Tachado" />
+                </button><button id="boton_eliminar" class="btneliminar" onclick="eliminartarea( ${index})">
+                <img src="https://lh3.google.com/u/0/d/1mrx8VEu6n_gGO8ztm5ZPlAwTLvGBHwZE=w1920-h953-iv1" alt="Eliminar Tarea" />
+                </button></li>`;
+        }
+      });
+    };
+
+    const inicio = () => {
+      bienvenido.style.display = "block";
+      menut.style.display = "none";
+      elemnohaytareas.style.display = "none";
+      detalletarea.style.display = "none";
+      creartarea.style.display = "none";
+
+      variarfrases();
+    };
+
+    inicio(); //COMIENZOOO
+
+    const nohaytareas = () => {
+      menut.style.display = "none";
+      elemnohaytareas.style.display = "block";
+      detalletarea.style.display = "none";
+      creartarea.style.display = "none";
+      mensaje.innerHTML = `<p class="nohaytareas">...No hay tareas pendientes...</p>`;
+    };
+
+    const mostrarcreartareas = () => {
+      menut.style.display = "none";
+      elemnohaytareas.style.display = "none";
+      detalletarea.style.display = "none";
+      creartarea.style.display = "block";
+    };
+
+    // para mostrar detalle de tarea indicando indice de array
+    const mostrardetalletarea = (indice) => {
+      const OBJtarea = tareas[indice];
+      menut.style.display = "none";
+      elemnohaytareas.style.display = "none";
+      detalletarea.style.display = "block";
+      creartarea.style.display = "none";
+
+      list_det.innerHTML = "";
+      list_det.innerHTML += `<li class="gochi-hand-regular agrandar liendetalle">${OBJtarea.titulo}</li>`;
+      list_det.innerHTML += `<p class="descripcion">${OBJtarea.descripcion}</p>`;
+      cat_pie.innerHTML = `<p>categoría: <span class="gochi-hand-regular up"> ${OBJtarea.categoria}</span></p>`;
+      ubicar_icono(OBJtarea.categoria);
+    };
+
+    const funcreartarea = () => {
+      let nuevotitulo = document.getElementById("nuevotitulo").value;
+      let nuevadescrip = document.getElementById("nuevadescrip").value;
+      let nuevacat = document.getElementById("nuevacat").value;
+      //validar
+      if (nuevotitulo === "" || nuevadescrip === "" || nuevacat === "") {
+        alert("Complete todos los campos");
+      } else {
+        // Crear un nuevo objeto de tarea
+        let nuevaTarea = {
+          titulo: nuevotitulo,
+          descripcion: nuevadescrip,
+          categoria: nuevacat,
+          hecho: false,
+        };
+        // Agregar la nueva tarea al array de tareas
+        tareas.push(nuevaTarea);
+
+        //actualiza el storage
+
+        localStorage.setItem("tareitas", JSON.stringify(tareas));
+
+        compruebatareas();
+        //vaciar cajas de texto
+        document.getElementById("nuevotitulo").value = "";
+        document.getElementById("nuevadescrip").value = "";
+        document.getElementById("nuevacat").value = "";
+      }
+    };
+
+    //eliminar
+    const eliminartarea = (indicetarea) => {
+      const confirmacion = confirm("¿Estás seguro de que deseas eliminar esta tarea?");
+      if (confirmacion) {
+        // Si el usuario confirma, eliminamos la tarea
+        tareas.splice(indicetarea, 1);
+        localStorage.setItem("tareitas", JSON.stringify(tareas));
+        compruebatareas();
+      }
+    };
+
+    eliminartarea_detalle = () => {
+      let titulo = list_det.innerHTML.match(/<li class="gochi-hand-regular">(.*?)<\/li>/)[1]; //rebuscada para ubicar index con ayuda de titulo dentro en HTML
+      console.log(titulo);
+      tareas.map((tarea, index) => {
+        if (tarea.titulo == titulo) {
+          indice = index;
+          console.log(indice);
+        }
+      });
+      eliminartarea(indice);
+    };
+
+    //tachar
+    const tachar = (indice) => {
+      if (tareas[indice].hecho == false) {
+        tareas[indice].hecho = true;
+      } else {
+        tareas[indice].hecho = false;
+      }
+      localStorage.setItem("tareitas", JSON.stringify(tareas));
+      mostrartareas();
+    };
+
+    const ubicar_icono = (categoria) => {
+      objt_cat.map((cat) => {
+        if (cat.categoria === categoria) {
+          imgCat.setAttribute("src", cat.url);
+        }
+      });
+    };
+
+    const ubicar_icono_para_lista = (categoria) => {
+      let urlEncontrada;
+      objt_cat.map((cat) => {
+        if (cat.categoria === categoria) {
+          urlEncontrada = cat.url;
+        }
+        return cat; //Necesario devolver un objeto para el método map, aunque no se usa. me volvi loco con esto, me ayudo el gpt luego supe que podria implementar find pero lo voy a usar cuando lo entienda
+      });
+      return urlEncontrada;
+    };
+    /*  mi version de intento
+      const ubicar_icono_para_lista = (categoria) => {
+        objt_cat.map((cat) => {
+          if (cat.categoria === categoria) {
+            return cat.url;
+          }
+        });
+      }; */
+  </script>
+</html>
